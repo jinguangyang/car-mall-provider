@@ -1,0 +1,38 @@
+spring:
+  profiles:
+    active: test
+dubbo:
+  application:
+    name: car-mall-service
+    owner: mall
+  protocol:
+    accesslog: false         # 可选 服务治理 设为true，将向logger中输出访问日志，也可填写访问日志文件路径，直接把访问日志输出到指定文件 2.0.5以上版本
+    serialization: nativejava
+    threadpool: cached
+    threads: 1000
+    accepts: 1000
+    port: 8514
+
+  scan:
+    basePackages: com.car.mall.service
+  provider:
+    delay: -1
+    timeout: 10000
+    retries: -1
+    accesslog: false
+    group: boot201
+    token: true
+    version: 1.0.0
+
+  consumer:
+    group: boot201
+    version: 1.0.0
+    check: false
+    timeout: 60000
+
+logging:
+  config: classpath:logback-boot.xml
+---
+#存储服务进程，用于监控服务
+pid:
+  path: /mall/logs/mall-service/mall.pid
